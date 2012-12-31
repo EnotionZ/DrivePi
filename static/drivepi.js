@@ -2,16 +2,16 @@
 	var debug = true;
 	var ws = new WebSocket('WS://' + location.host + '/websocket');
 	ws.onopen = function() {
-		if(debug) ws.send('Connected ' + (new Date()));
 
-		turnRng.addEventListener('change', function() {
-			ws.send('turn ' + turnRng.value);
-		});
-		driveRng.addEventListener('change', function() {
-			ws.send('drive ' + driveRng.value);
-		});
+		var changeHandler = function() { ws.send(this.name + ' ' + this.value); };
+		var mouseupHandler = function() { this.value = 0; changeHandler.call(this); };
+
+		turnRng.addEventListener('change', changeHandler);
+		turnRng.addEventListener('mouseup', mouseupHandler);
+		driveRng.addEventListener('change', changeHandler);
+		driveRng.addEventListener('mouseup', mouseupHandler);
+
+		if(debug) ws.send('Connected ' + (new Date()));
 	};
-	if(debug) {
-		ws.onmessage = function(e) { console.log(e.data); };
-	}
+	if(debug) ws.addEventListener('message', function(e) { console.log(e.data); });
 })();
