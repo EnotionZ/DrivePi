@@ -2,6 +2,7 @@ import re
 import tornado.ioloop
 import tornado.web
 import tornado.websocket
+import pwm
 
 
 class EchoWebSocket(tornado.websocket.WebSocketHandler):
@@ -14,6 +15,9 @@ class EchoWebSocket(tornado.websocket.WebSocketHandler):
     val = match.group(2)
     print '[Command: ' + cmd + ']    [value: ' + val + ']'
     self.write_message(u"[Command: " + cmd + "]    [value: " + val + "]")
+
+    if(cmd == 'drive'):
+      pwm.drive(int(float(val)))
 
   def on_close(self):
     print "WebSocket closed"

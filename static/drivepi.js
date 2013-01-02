@@ -66,7 +66,7 @@
 					if(!initialArea) initialArea = c[0].width*c[0].height;
 					ctx.strokeRect(c[0].x, c[0].y, c[0].width, c[0].height);
 
-					var normalizedTurnValue = (c[0].x-150)/10;
+					var normalizedTurnValue = (c[0].x - videoWidth/2)/10;
 					turnRng.value = normalizedTurnValue;
 					changeHandler.call(turnRng);
 					//driveRng.value = (c[0].width*c[0].height-initialArea)/initialArea;
