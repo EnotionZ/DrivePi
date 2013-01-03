@@ -18,6 +18,8 @@ class EchoWebSocket(tornado.websocket.WebSocketHandler):
 
     if(cmd == 'drive'):
       pwm.drive(int(float(val)))
+    if(cmd == 'turn'):
+      pwm.turn(-int(float(val)))
 
   def on_close(self):
     print "WebSocket closed"

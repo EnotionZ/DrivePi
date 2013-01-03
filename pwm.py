@@ -13,10 +13,15 @@ mid = 400
 def reset():
   pwm.setPWM(0, 0, 0)
   pwm.setPWM(1, 0, 0)
+  turn(0)
 
 def drive(val):
   pwm.setPWM(0, 0, mid+val)
   pwm.setPWM(1, 0, mid-val)
+
+turnMid = 379
+def turn(val):
+  pwm.setPWM(15, 0, turnMid+val)
 
 reset()
 
